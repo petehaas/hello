@@ -1,62 +1,39 @@
-<!doctype html>
-<html lang="en">
-<head>
+<!DOCTYPE html>
+<html>
+<head lang="en">
     <meta charset="UTF-8">
-    <title>Hey There!</title>
-    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <meta name="description" content="application development using javascript, Microsoft .NET, and SQL server"/>
+    <meta name="tags" content="petehaas developer application development software web technologies telecommunications webRTC javascript"/>
+    <title>Pete Haas</title>
 </head>
+<link rel="stylesheet" href="style.css"/>
+<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
 <body>
-<div class="container">
-    <button class="btn btn-info" onclick="listHistory()" >GetHistory</button>
-    <div id="summary"></div>
+
+<div class="page-head container-fluid">
+    <h1><icon class="glyphicon glyphicon-user"></icon> I'm Pete Haas, I write code and do other things</h1>
+    <a href="https://github.com/petehaas"><i class="fa fa-github-alt fa-5x"></i></a>
+    <a href="https://twitter.com/PeteHaas"><i class="fa fa-twitter fa-5x"></i></a>
+    <a href="https://www.linkedin.com/in/petehaas1"><i class="fa fa-linkedin-square fa-5x"></i></a>
+    <a href="http://petehaas.com/blog"><i class="fa fa-wordpress fa-5x"></i></a>
 </div>
 
-<script src="Hello.js"></script>
-<script>
-    function listHistory() {
-        var result = getHistory();
-        var summaryDiv = document.getElementById('summary');
+<div class="fullscreen-bg">
+    <video id="videoPlayer" loop muted autoplay poster="video/petevid.png" class="fullscreen-bg__video">
+    </video>
+</div>
 
-        // Summary
-        var summaryHeader = document.createElement('h1');
-        var summaryText = document.createTextNode('Summary');
-        summaryHeader.appendChild(summaryText);
-        summaryDiv.appendChild(summaryHeader);
-
-        // Summary Details
-        result.summary.map(function(data) {
-            summaryDiv.innerHTML += '<p>' + data.year + ' ' + data.description + '</p>';
-        });
-
-        // Education
-        var educationHeader = document.createElement('h2');
-        var educationText = document.createTextNode('Education');
-        educationHeader.appendChild(educationText);
-        summaryDiv.appendChild(educationHeader);
-
-        // Education Details
-        summaryDiv.innerHTML +="<ul>";
-        summaryDiv.innerHTML += "<li>Bachelor Degree? " + result.education.bachelor_degree + "</li>";
-        summaryDiv.innerHTML += "<li>Master Degree? " + result.education.master_degree + "</li>";
-        summaryDiv.innerHTML +="</ul>";
-
-
-        // Languages and Frameworks
-        var languageHeader = document.createElement('h2');
-        var languageText = document.createTextNode('Languages and Frameworks');
-        languageHeader.appendChild(languageText);
-        summaryDiv.appendChild(languageHeader);
-
-        // Language Details
-        var myTable = "<table class='table'><tr><th>Framework</th><th>Description</th></tr>";
-        Object.keys(result.frameworks.javascriptFrameworks).map(function(data) {
-            myTable += '<tr><td>' + data  + '</td><td>' + result.frameworks.javascriptFrameworks[data]+ '</td></tr>';
-
-        });
-        summaryDiv.innerHTML += myTable +"</table>";
-
-
-    }
-</script>
 </body>
+
+<script>
+    window.addEventListener('load', function() {
+        // Grab the video, Cache it, and place it on the background.
+        var videoUrl = "./video/petevideoshort.mp4";
+        var videoPlayer = document.querySelector('#videoPlayer');
+        videoPlayer.src = videoUrl;
+    });
+
+
+</script>
 </html>

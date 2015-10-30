@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hey There!</title>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <button class="btn btn-info" onclick="listHistory()" >GetHistory</button>
+    <div id="summary"></div>
+</div>
+
+<script src="Hello.js"></script>
+<script>
+    function listHistory() {
+        var result = getHistory();
+        var summaryDiv = document.getElementById('summary');
+
+        // Summary
+        var summaryHeader = document.createElement('h1');
+        var summaryText = document.createTextNode('Summary');
+        summaryHeader.appendChild(summaryText);
+        summaryDiv.appendChild(summaryHeader);
+
+        // Summary Details
+        result.summary.map(function(data) {
+            summaryDiv.innerHTML += '<p>' + data.year + ' ' + data.description + '</p>';
+        });
+
+        // Education
+        var educationHeader = document.createElement('h2');
+        var educationText = document.createTextNode('Education');
+        educationHeader.appendChild(educationText);
+        summaryDiv.appendChild(educationHeader);
+
+        // Education Details
+        summaryDiv.innerHTML +="<ul>";
+        summaryDiv.innerHTML += "<li>Bachelor Degree? " + result.education.bachelor_degree + "</li>";
+        summaryDiv.innerHTML += "<li>Master Degree? " + result.education.master_degree + "</li>";
+        summaryDiv.innerHTML +="</ul>";
+
+
+        // Languages and Frameworks
+        var languageHeader = document.createElement('h2');
+        var languageText = document.createTextNode('Languages and Frameworks');
+        languageHeader.appendChild(languageText);
+        summaryDiv.appendChild(languageHeader);
+
+        // Language Details
+        var myTable = "<table class='table'><tr><th>Framework</th><th>Description</th></tr>";
+        Object.keys(result.frameworks.javascriptFrameworks).map(function(data) {
+            myTable += '<tr><td>' + data  + '</td><td>' + result.frameworks.javascriptFrameworks[data]+ '</td></tr>';
+
+        });
+        summaryDiv.innerHTML += myTable +"</table>";
+
+
+    }
+</script>
+</body>
+</html>
